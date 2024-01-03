@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const {loading, error} = useSelector((state)=> state.user, [shallowEqual]);
+  const {loading, error} = useSelector((state)=> state.user);
   const navigate= useNavigate();
   const dispatch= useDispatch();
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function SignIn() {
       // const error=data.error;
       if(data.success === false){
         console.log(data);
-        dispatch(signInFailure(data));
+        dispatch(signInFailure(data.error));
         return;}
       dispatch(signInSuccess(data));
       navigate('/');
@@ -73,7 +73,7 @@ export default function SignIn() {
         </Link>
       </div>
       <p className='text-red-700 mt-5'> 
-        {error ?  'Something went wrong' : ""}
+       {error ? error || 'Something went wrong' : ""}       
       </p>
     </div>
   );
