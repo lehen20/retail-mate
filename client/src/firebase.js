@@ -8,7 +8,6 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const env = await import.meta.env;
-console.log(env.VITE_FIREBASE);
 const firebaseConfig = {
   apiKey: env.VITE_FIREBASE,
   authDomain: "retail-mate.firebaseapp.com",
